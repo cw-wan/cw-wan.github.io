@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under Construction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            background-color: #0a0a0a; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Times New Roman", Garamond, Georgia, serif;
+        }
+
+        .container {
+            text-align: center;
+            animation: primordial-breath 8s ease-in-out infinite;
+        }
+
+        h1 {
+            color: #d4d4d4; 
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background-color: #555;
+            margin: 0 auto 1.5rem auto;
+            border: none;
+        }
+
+        p {
+            color: #777;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+
+        @keyframes primordial-breath {
+            0%, 100% {
+                opacity: 0.3;
+                filter: blur(2px);
+                transform: scale(0.98);
+            }
+            50% {
+                opacity: 1;
+                filter: blur(0px);
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Forming from the Void.</h1>
+        <hr class="divider">
+        <p>正在构建秩序</p>
+    </div>
+</body>
+</html>
