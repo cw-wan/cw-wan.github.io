@@ -6,15 +6,12 @@
     <title>RECONSTRUCTION</title>
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #050505;
-            overflow: hidden;
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #050505; overflow: hidden;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
+        /* 噪点层 */
         #noise-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 50; pointer-events: none; opacity: 0.07;
@@ -22,64 +19,45 @@
             mix-blend-mode: overlay;
         }
 
-        #world-canvas {
-            display: block; position: absolute; top: 0; left: 0; z-index: 1;
-        }
+        #world-canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; }
+        .ui-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; pointer-events: none; }
 
-        .ui-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; pointer-events: none;
-        }
-
+        /* 文字容器绝对居中 */
         .center-content {
-            position: absolute;
-            top: 45%; 
-            left: 50%;
+            position: absolute; top: 45%; left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
-            width: 100%; 
+            text-align: center; width: 100%;
             mix-blend-mode: hard-light;
         }
 
+        /* 标题样式 */
         h1 {
-            font-weight: 300;
-            font-size: 1.2rem;
-            color: #ffffff;
-            text-transform: uppercase;
-            margin: 0 0 1.5rem 0;
-            opacity: 0.9;
-            
-            letter-spacing: 0.8em;
-            text-indent: 0.8em; 
+            font-weight: 300; font-size: 1.2rem; color: #ffffff; text-transform: uppercase;
+            margin: 0 0 1.5rem 0; opacity: 0.9;
+            letter-spacing: 0.8em; text-indent: 0.8em;
         }
 
         .subtitle-cn {
             font-family: "Songti SC", "Noto Serif SC", "STSong", "SimSun", serif;
-            font-weight: 400;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.65);
-            
-            letter-spacing: 1.2em;
-            text-indent: 1.2em;
+            font-weight: 400; font-size: 0.9rem; color: rgba(255, 255, 255, 0.65);
+            letter-spacing: 1.2em; text-indent: 1.2em;
         }
 
+        /* 装饰线 */
         .line { position: absolute; background: rgba(255,255,255,0.1); }
         .l-vert { width: 1px; height: 80px; left: 50%; bottom: 0; transform: translateX(-50%); }
         .l-hori { width: 80px; height: 1px; top: 50%; left: 30px; }
-
     </style>
 </head>
 <body>
-
     <div id="noise-layer"></div>
     <canvas id="world-canvas"></canvas>
-
+    
     <div class="ui-layer">
         <div class="line l-vert"></div>
         <div class="line l-hori"></div>
-        
         <div class="center-content">
-            <h1>Neon Genesis</h1>
+            <h1>NEON GENESIS</h1>
             <div class="subtitle-cn">重塑秩序 · 晨蔚的世界</div>
         </div>
     </div>
@@ -88,28 +66,99 @@
         const canvas = document.getElementById('world-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
-        const CONFIG = { gridSize: 50, speed: 1.2, waveHeight: 45, waveFreq: 0.003, viewDistance: 70, fov: 350 };
+
+        const CONFIG = {
+            gridSize: 50,
+            speed: 2.0,
+            waveHeight: 45,
+            waveFreq: 0.003,
+            viewDistance: 80,
+            fov: 350,
+            nearFadeLimit: 150, // 近处淡出阈值：小于150距离时开始变透明
+            farFadeLimit: 3500  // 远处消失阈值
+        };
+
         let flightOffset = 0;
-        function resize() { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; }
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
         window.addEventListener('resize', resize);
         resize();
+
         function draw() {
-            ctx.fillStyle = "#050505"; ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = "#050505";
+            ctx.fillRect(0, 0, width, height);
+
             flightOffset -= CONFIG.speed;
+
+            // 处理无限循环的平滑衔接
+            // 让 offset 始终保持在 0 到 -gridSize 之间，避免数值过大
+            // 但为了波浪连续，我们在计算 wave 时使用另一个累加变量
+            let gridShift = flightOffset % CONFIG.gridSize;
+
             const horizonY = height * 0.55;
-            const gradient = ctx.createLinearGradient(0, horizonY - 100, 0, horizonY + 80);
-            gradient.addColorStop(0, "rgba(0,0,0,0)"); gradient.addColorStop(0.5, "rgba(200,210,255,0.03)"); gradient.addColorStop(1, "rgba(0,0,0,0)");
-            ctx.fillStyle = gradient; ctx.fillRect(0, horizonY - 100, width, 180);
-            const cols = Math.ceil(width / CONFIG.gridSize) + 20; const rows = CONFIG.viewDistance; const cx = width / 2; const cy = horizonY;
+            
+            // 背景光晕
+            const gradient = ctx.createLinearGradient(0, horizonY - 120, 0, horizonY + 80);
+            gradient.addColorStop(0, "rgba(0,0,0,0)");
+            gradient.addColorStop(0.5, "rgba(200,215,255,0.04)");
+            gradient.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, horizonY - 120, width, 200);
+
+            const cols = Math.ceil(width / CONFIG.gridSize) + 20;
+            const rows = CONFIG.viewDistance;
+            const cx = width / 2;
+            const cy = horizonY;
+
             for (let z = 0; z < rows; z++) {
-                let localZ = z * CONFIG.gridSize + (flightOffset % CONFIG.gridSize);
-                if (localZ <= 0 || localZ > 3000) continue;
-                const scale = CONFIG.fov / (CONFIG.fov + localZ); const alpha = localZ / 3000;
+                // localZ: 粒子相对于摄像机的距离
+                // 我们加上 gridShift 修正位置
+                let localZ = z * CONFIG.gridSize + gridShift;
+                
+                // 如果加上偏移后变成了负数(跑到了背后)，就把它挪到最远处，实现循环
+                // 但这里我们简单处理：只画正前方的
+                if (localZ <= 0) continue; 
+                if (localZ > CONFIG.farFadeLimit) continue;
+
+                const scale = CONFIG.fov / (CONFIG.fov + localZ);
+                
+                // --- 1. 远处迷雾计算 (Far Fade) ---
+                let distRatio = localZ / CONFIG.farFadeLimit;
+                let opacityFar = 1 - Math.pow(distRatio, 3); // 三次方衰减
+
+                // --- 2. 近处溶解计算 (Near Fade) ---
+                // 解决"突然消失"的核心逻辑
+                let opacityNear = 1;
+                if (localZ < CONFIG.nearFadeLimit) {
+                    // 如果距离小于150，透明度线性变为0
+                    opacityNear = localZ / CONFIG.nearFadeLimit; 
+                }
+
+                // 最终透明度 = 远处淡出 * 近处淡出
+                let finalAlpha = opacityFar * opacityNear;
+                
+                // 极低透明度不渲染，优化性能
+                if (finalAlpha < 0.01) continue;
+
                 for (let x = -cols/2; x < cols/2; x++) {
-                    let worldX = x * CONFIG.gridSize; let absoluteZ = z * CONFIG.gridSize + flightOffset;
+                    let worldX = x * CONFIG.gridSize;
+                    
+                    // 为了保证波浪连续，这里使用 z * gridSize + 原始的 flightOffset
+                    let absoluteZ = z * CONFIG.gridSize + flightOffset;
+                    
                     let wave = Math.sin(worldX * 0.004 + absoluteZ * 0.002) * Math.cos(absoluteZ * CONFIG.waveFreq) * CONFIG.waveHeight;
-                    let screenX = cx + worldX * scale; let screenY = cy + (120 + wave) * scale; let size = Math.max(0.6, 2.2 * scale);
-                    ctx.fillStyle = `rgba(220, 230, 255, ${1 - alpha})`; ctx.fillRect(screenX, screenY, size, size);
+
+                    let screenX = cx + worldX * scale;
+                    let screenY = cy + (120 + wave) * scale;
+                    let size = Math.max(0.6, 2.2 * scale);
+
+                    ctx.fillStyle = `rgba(220, 230, 255, ${finalAlpha})`;
+                    ctx.fillRect(screenX, screenY, size, size);
                 }
             }
             requestAnimationFrame(draw);
