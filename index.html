@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RECONSTRUCTION</title>
+    <title>SILKY_DUNES_VIGNETTE</title>
     <style>
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: #050505; overflow: hidden;
+            background-color: #050608; overflow: hidden;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
@@ -22,7 +22,6 @@
         #world-canvas { display: block; position: absolute; top: 0; left: 0; z-index: 1; }
         .ui-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100; pointer-events: none; }
 
-        /* 文字容器绝对居中 */
         .center-content {
             position: absolute; top: 45%; left: 50%;
             transform: translate(-50%, -50%);
@@ -30,23 +29,22 @@
             mix-blend-mode: hard-light;
         }
 
-        /* 标题样式 */
         h1 {
-            font-weight: 300; font-size: 1.2rem; color: #ffffff; text-transform: uppercase;
-            margin: 0 0 1.5rem 0; opacity: 0.9;
+            font-weight: 300; font-size: 1.4rem; color: #e0e5ff;
+            text-transform: uppercase; margin: 0 0 1.5rem 0; opacity: 0.95;
             letter-spacing: 0.8em; text-indent: 0.8em;
+            text-shadow: 0 0 20px rgba(200, 220, 255, 0.4);
         }
 
         .subtitle-cn {
             font-family: "Songti SC", "Noto Serif SC", "STSong", "SimSun", serif;
-            font-weight: 400; font-size: 0.9rem; color: rgba(255, 255, 255, 0.65);
+            font-weight: 400; font-size: 1rem; color: rgba(224, 229, 255, 0.7);
             letter-spacing: 1.2em; text-indent: 1.2em;
         }
 
-        /* 装饰线 */
-        .line { position: absolute; background: rgba(255,255,255,0.1); }
-        .l-vert { width: 1px; height: 80px; left: 50%; bottom: 0; transform: translateX(-50%); }
-        .l-hori { width: 80px; height: 1px; top: 50%; left: 30px; }
+        .line { position: absolute; background: rgba(220, 230, 255, 0.1); }
+        .l-vert { width: 1px; height: 100px; left: 50%; bottom: 0; transform: translateX(-50%); }
+        .l-hori { width: 100px; height: 1px; top: 50%; left: 30px; }
     </style>
 </head>
 <body>
@@ -58,7 +56,7 @@
         <div class="line l-hori"></div>
         <div class="center-content">
             <h1>NEON GENESIS</h1>
-            <div class="subtitle-cn">重塑秩序 · 晨蔚的世界</div>
+            <div class="subtitle-cn">重建秩序 · 晨蔚的世界</div>
         </div>
     </div>
 
@@ -68,14 +66,14 @@
         let width, height;
 
         const CONFIG = {
-            gridSize: 50,
-            speed: 2.0,
-            waveHeight: 45,
-            waveFreq: 0.003,
-            viewDistance: 80,
-            fov: 350,
-            nearFadeLimit: 150, // 近处淡出阈值：小于150距离时开始变透明
-            farFadeLimit: 3500  // 远处消失阈值
+            gridSize: 18,       // 高密度
+            viewDistance: 160,  // 高视距
+            speed: 0.8,
+            fov: 650,
+            nearFadeLimit: 100, 
+            farFadeLimit: 3000,
+            sideFadeMargin: 200, // 【新配置】两侧边缘渐变区域宽度 (像素)
+            cameraHeight: 200
         };
 
         let flightOffset = 0;
@@ -89,75 +87,91 @@
         window.addEventListener('resize', resize);
         resize();
 
+        // 数学沙丘模型
+        function getDuneHeight(x, z) {
+            let y = Math.sin(x * 0.001 + z * 0.0008) * 80;
+            y += Math.sin(x * 0.0025 + z * 0.002 + 100) * 35;
+            y += Math.sin(x * 0.005 + z * 0.01) * 5;
+            return y * 1.2; 
+        }
+
         function draw() {
-            ctx.fillStyle = "#050505";
+            ctx.fillStyle = "#050608";
             ctx.fillRect(0, 0, width, height);
 
             flightOffset -= CONFIG.speed;
-
-            // 处理无限循环的平滑衔接
-            // 让 offset 始终保持在 0 到 -gridSize 之间，避免数值过大
-            // 但为了波浪连续，我们在计算 wave 时使用另一个累加变量
             let gridShift = flightOffset % CONFIG.gridSize;
-
             const horizonY = height * 0.55;
-            
-            // 背景光晕
-            const gradient = ctx.createLinearGradient(0, horizonY - 120, 0, horizonY + 80);
+
+            // 氛围光
+            const gradient = ctx.createLinearGradient(0, horizonY - 150, 0, horizonY + 120);
             gradient.addColorStop(0, "rgba(0,0,0,0)");
-            gradient.addColorStop(0.5, "rgba(200,215,255,0.04)");
+            gradient.addColorStop(0.5, "rgba(200, 220, 255, 0.03)"); 
             gradient.addColorStop(1, "rgba(0,0,0,0)");
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, horizonY - 120, width, 200);
+            ctx.fillRect(0, horizonY - 150, width, 270);
 
-            const cols = Math.ceil(width / CONFIG.gridSize) + 20;
+            // 增加列数以确保覆盖到屏幕外，供渐变使用
+            const cols = Math.ceil(width / CONFIG.gridSize * 1.8) + 40; 
             const rows = CONFIG.viewDistance;
             const cx = width / 2;
             const cy = horizonY;
 
             for (let z = 0; z < rows; z++) {
-                // localZ: 粒子相对于摄像机的距离
-                // 我们加上 gridShift 修正位置
                 let localZ = z * CONFIG.gridSize + gridShift;
-                
-                // 如果加上偏移后变成了负数(跑到了背后)，就把它挪到最远处，实现循环
-                // 但这里我们简单处理：只画正前方的
-                if (localZ <= 0) continue; 
-                if (localZ > CONFIG.farFadeLimit) continue;
+                if (localZ <= 0 || localZ > CONFIG.farFadeLimit) continue;
 
                 const scale = CONFIG.fov / (CONFIG.fov + localZ);
                 
-                // --- 1. 远处迷雾计算 (Far Fade) ---
+                // --- 纵向透明度计算 (远近) ---
                 let distRatio = localZ / CONFIG.farFadeLimit;
-                let opacityFar = 1 - Math.pow(distRatio, 3); // 三次方衰减
-
-                // --- 2. 近处溶解计算 (Near Fade) ---
-                // 解决"突然消失"的核心逻辑
+                let opacityFar = 1 - Math.pow(distRatio, 2); 
                 let opacityNear = 1;
-                if (localZ < CONFIG.nearFadeLimit) {
-                    // 如果距离小于150，透明度线性变为0
-                    opacityNear = localZ / CONFIG.nearFadeLimit; 
-                }
-
-                // 最终透明度 = 远处淡出 * 近处淡出
-                let finalAlpha = opacityFar * opacityNear;
-                
-                // 极低透明度不渲染，优化性能
-                if (finalAlpha < 0.01) continue;
+                if (localZ < CONFIG.nearFadeLimit) opacityNear = localZ / CONFIG.nearFadeLimit; 
+                let opacityDepth = opacityFar * opacityNear; // 合并远近透明度
 
                 for (let x = -cols/2; x < cols/2; x++) {
                     let worldX = x * CONFIG.gridSize;
-                    
-                    // 为了保证波浪连续，这里使用 z * gridSize + 原始的 flightOffset
                     let absoluteZ = z * CONFIG.gridSize + flightOffset;
                     
-                    let wave = Math.sin(worldX * 0.004 + absoluteZ * 0.002) * Math.cos(absoluteZ * CONFIG.waveFreq) * CONFIG.waveHeight;
+                    let duneHeight = getDuneHeight(worldX, absoluteZ);
+                    let worldY = CONFIG.cameraHeight + duneHeight;
 
                     let screenX = cx + worldX * scale;
-                    let screenY = cy + (120 + wave) * scale;
-                    let size = Math.max(0.6, 2.2 * scale);
+                    let screenY = cy + worldY * scale;
 
-                    ctx.fillStyle = `rgba(220, 230, 255, ${finalAlpha})`;
+                    // --- 【核心修改】横向透明度计算 (两侧边缘) ---
+                    // 计算粒子距离左右屏幕边缘的距离
+                    let distToLeft = screenX;
+                    let distToRight = width - screenX;
+                    // 取最近边缘的距离
+                    let closestEdgeDist = Math.min(distToLeft, distToRight);
+
+                    let opacitySide = 1.0;
+                    // 如果进入了边缘渐变区 (比如距离边缘小于 200px)
+                    if (closestEdgeDist < CONFIG.sideFadeMargin) {
+                        // 计算渐变比例 (距离越近越透明)
+                        opacitySide = closestEdgeDist / CONFIG.sideFadeMargin;
+                        // 确保不小于0
+                        opacitySide = Math.max(0, opacitySide);
+                    }
+
+                    // --- 最终透明度合成 ---
+                    // 深度透明度 * 横向透明度
+                    let finalAlpha = opacityDepth * opacitySide;
+
+                    // 性能优化：剔除几乎透明的粒子
+                    if (finalAlpha < 0.01) continue;
+                    
+                    let size = Math.max(0.6, 2.5 * scale);
+                    let brightness = 1 + (duneHeight / 150); 
+                    
+                    let r = 200 * brightness; let g = 215 * brightness; let b = 255 * brightness;
+                    r = r > 255 ? 255 : (r < 0 ? 0 : r);
+                    g = g > 255 ? 255 : (g < 0 ? 0 : g);
+                    b = b > 255 ? 255 : (b < 0 ? 0 : b);
+
+                    ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${finalAlpha})`;
                     ctx.fillRect(screenX, screenY, size, size);
                 }
             }
