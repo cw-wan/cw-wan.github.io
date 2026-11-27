@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>The Great Gatsby — Event Logic Tree</title>
+    <meta name="description" content="Explore the story of The Great Gatsby through a binary Event Logic Tree, with character channels, sequences, temporal alignment, and interval containment.">
+    <link rel="canonical" href="https://cw-wan.github.io/projects/elt/">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./renderer.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#breadcrumbs">Skip to the event tree</a>
+    <main class="elt-app">
+      <header class="page-heading">
+        <h1>The Great Gatsby</h1>
+        <p class="subtitle">Event Logic Tree · Cast and stills from the 2013 film</p>
+      </header>
+
+      <section class="cast-section" aria-label="Character channels">
+        <div id="cast" class="cast"></div>
+      </section>
+
+      <section class="legend" aria-label="Event logic operators">
+        <button type="button" class="legend-item" data-operator="SEQ" data-tooltip="Sequence: the first child is followed by the second child.">
+          <span class="operator">SEQ</span><span>Sequence</span>
+        </button>
+        <button type="button" class="legend-item" data-operator="SYNC" data-tooltip="Temporal alignment: two character projections of the same shared event, not independent evidence.">
+          <span class="operator">SYNC</span><span>Temporal alignment</span>
+        </button>
+        <button type="button" class="legend-item" data-operator="GUARD" data-tooltip="Interval containment: the inner event occurs within the outer interval. Child 0 is the inner event; child 1 is the outer interval.">
+          <span class="operator">GUARD</span><span>Interval containment</span>
+        </button>
+        <span class="channel-key">Character = channel</span>
+      </section>
+
+      <nav id="breadcrumbs" aria-label="Tree breadcrumb" tabindex="-1"></nav>
+      <p id="tree-error" class="error-message" role="alert" hidden></p>
+      <div id="tree-stage" aria-label="Event Logic Tree">
+        <svg id="tree-edges" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg>
+        <div id="tree-nodes"></div>
+      </div>
+      <p id="tree-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true">Loading the event tree.</p>
+
+      <noscript><p>JavaScript is needed to explore the tree. The complete <a href="./data/gatsby-elt.en.json">English event data</a> is also available to read.</p></noscript>
+
+      <details id="sources" class="sources">
+        <summary>Image and story sources</summary>
+        <div id="source-content"></div>
+      </details>
+    </main>
+    <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  </body>
+</html>

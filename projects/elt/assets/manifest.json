@@ -1,0 +1,236 @@
+{
+  "status": "All 14 historical image URLs were retrieved on 2026-11-27. Files are unchanged JPEG downloads, decoded and visually inspected. Original embedded image bytes and the original rendered page are unavailable; byte identity and visual fidelity to that page remain unverified.",
+  "portraits": {
+    "G": {
+      "character": "Jay Gatsby",
+      "actor": "Leonardo DiCaprio",
+      "source_page": "https://www.glamour.com/story/great-gatsby-trailer-posters",
+      "image_url": "https://media.glamour.com/photos/56957c975fff94d44eec0fd5/master/w_240,c_limit/entertainment-2012-12-great-gatsby-leo-main.jpg",
+      "local": "./assets/portraits/G.jpg",
+      "format": "JPEG",
+      "width": 240,
+      "height": 356,
+      "bytes": 19228,
+      "sha256": "5f989f91db93a03fe5f2339d37aceab3c5878f4ba2ca4052a5da3925cc6b5c08",
+      "alt": "Jay Gatsby (Leonardo DiCaprio) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "D": {
+      "character": "Daisy Buchanan",
+      "actor": "Carey Mulligan",
+      "source_page": "https://www.glamour.com/story/great-gatsby-trailer-posters",
+      "image_url": "https://media.glamour.com/photos/56957c975fff94d44eec0fd9/master/w_240,c_limit/entertainment-2012-12-great-gatsby-carey-main.jpg",
+      "local": "./assets/portraits/D.jpg",
+      "format": "JPEG",
+      "width": 240,
+      "height": 355,
+      "bytes": 24011,
+      "sha256": "7c8d66539d150a1fcacdc771558ceff52cf422759e9fd61f44e4e52db53878bf",
+      "alt": "Daisy Buchanan (Carey Mulligan) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "N": {
+      "character": "Nick Carraway",
+      "actor": "Tobey Maguire",
+      "source_page": "https://www.glamour.com/story/great-gatsby-trailer-posters",
+      "image_url": "https://media.glamour.com/photos/56957c978fa134644ec236bb/master/w_240,c_limit/entertainment-2012-12-great-gatsby-tobey-main.jpg",
+      "local": "./assets/portraits/N.jpg",
+      "format": "JPEG",
+      "width": 240,
+      "height": 355,
+      "bytes": 23389,
+      "sha256": "e51c37394c12e98420bb32020706b195bf3615f1428bfe63358ac13cfd283f65",
+      "alt": "Nick Carraway (Tobey Maguire) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "T": {
+      "character": "Tom Buchanan",
+      "actor": "Joel Edgerton",
+      "source_page": "https://www.glamour.com/story/great-gatsby-trailer-posters",
+      "image_url": "https://media.glamour.com/photos/56957c97085ae0a85036d3a2/master/w_240,c_limit/entertainment-2012-12-great-gatsby-joel-main.jpg",
+      "local": "./assets/portraits/T.jpg",
+      "format": "JPEG",
+      "width": 240,
+      "height": 355,
+      "bytes": 21653,
+      "sha256": "191171fa54d99d0416de1b7d80c785e7509e038b10a62baf1bda152e3a2c19a1",
+      "alt": "Tom Buchanan (Joel Edgerton) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "J": {
+      "character": "Jordan Baker",
+      "actor": "Elizabeth Debicki",
+      "source_page": "https://www.glamour.com/story/great-gatsby-trailer-posters",
+      "image_url": "https://media.glamour.com/photos/56957c97085ae0a85036d3a5/master/w_240,c_limit/entertainment-2012-12-great-gatsby-elizabeth-main.jpg",
+      "local": "./assets/portraits/J.jpg",
+      "format": "JPEG",
+      "width": 240,
+      "height": 355,
+      "bytes": 22036,
+      "sha256": "ea8134311c083c1e86cfd80ad06f99b4962a0b886e0aca9548bc53d75dc0c5c6",
+      "alt": "Jordan Baker (Elizabeth Debicki) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "M": {
+      "character": "Myrtle Wilson",
+      "actor": "Isla Fisher",
+      "source_page": "https://www.glamour.com/story/great-gatsby-trailer-posters",
+      "image_url": "https://media.glamour.com/photos/56957c978fa134644ec236b8/master/w_240,c_limit/entertainment-2012-12-great-gatsby-isla-main.jpg",
+      "local": "./assets/portraits/M.jpg",
+      "format": "JPEG",
+      "width": 240,
+      "height": 355,
+      "bytes": 23546,
+      "sha256": "d31ec71ee5b17203e3a483a4b03c151db31e6080e4306aa3b62eb2da6ad72060",
+      "alt": "Myrtle Wilson (Isla Fisher) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "W": {
+      "character": "George Wilson",
+      "actor": "Jason Clarke",
+      "source_page": "https://www.imdb.com/title/tt1343092/mediaviewer/rm2294012417",
+      "image_url": "https://m.media-amazon.com/images/M/MV5BMmRjODg2MTUtMjMwNS00ZDBjLWIwM2MtODAwMTBmNTAzMTgzXkEyXkFqcGc%40._V1_.jpg",
+      "local": "./assets/portraits/W.jpg",
+      "format": "JPEG",
+      "width": 1920,
+      "height": 800,
+      "bytes": 101730,
+      "sha256": "6ccdf6e589295d8f5d2beb7a53decd63c081d6b63f2b8c7b7d30ccdf55f71e78",
+      "alt": "George Wilson (Jason Clarke) in The Great Gatsby (2013).",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "H": {
+      "character": "Henry Gatz",
+      "actor": null,
+      "fallback": "H",
+      "note": "Retain the original novel-character placeholder; do not invent a film actor or portrait.",
+      "local": null,
+      "visual_check": "No image by design; retain the H initial for the novel character."
+    }
+  },
+  "scenes": {
+    "hero": {
+      "source_page": "https://www.harpersbazaar.com/culture/film-tv/g69800127/best-party-scenes-movies/",
+      "image_url": "https://hips.hearstapps.com/hmg-prod/images/2t9cpb5-6942f5c486646.jpg",
+      "description": "Gatsby raises a glass",
+      "local": "./assets/scenes/hero.jpg",
+      "format": "JPEG",
+      "width": 3300,
+      "height": 1920,
+      "bytes": 362036,
+      "sha256": "ce437fb549dc888e9eaf2c51679272a0a1124254f18d4957a0cba67eba1a9a87",
+      "alt": "Jay Gatsby raises a champagne glass at a party in the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "party": {
+      "source_page": "https://www.dazeddigital.com/artsandculture/article/16165/1/gatsby-great-review",
+      "image_url": "https://images-prod.dazeddigital.com/600/268-0-1020-680/azure/dazed-prod/1030/6/1036027.jpg",
+      "description": "Mansion party",
+      "local": "./assets/scenes/party.jpg",
+      "format": "JPEG",
+      "width": 600,
+      "height": 400,
+      "bytes": 90503,
+      "sha256": "abeb6a6dca08b7d03e64534b74bf940ee17e9effbf426dd897a8aac7eda281c3",
+      "alt": "Guests celebrate around the pool at Gatsby's mansion in the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "reunion": {
+      "source_page": "https://www.flower.style/film/forget-the-oscars-our-award-goes-to-the-most-memorable-flower-moments",
+      "image_url": "https://www.flower.style/assets/images/og/7efe8dfd588f42ce8888753ad3d10d9d.jpg",
+      "description": "Daisy and Gatsby with flowers",
+      "local": "./assets/scenes/reunion.jpg",
+      "format": "JPEG",
+      "width": 1664,
+      "height": 1014,
+      "bytes": 650985,
+      "sha256": "3ee438bae3b3cca04211fed3a589ce5ab781527a8776ee27cd80f4353fc4d966",
+      "alt": "Daisy and Gatsby sit together among flowers in the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "plaza": {
+      "source_page": "https://www.pinterest.com/pin/555631672750400729/",
+      "image_url": "https://i.pinimg.com/originals/af/98/1f/af981fa1340009a9a617e77386f49e6d.jpg",
+      "description": "Plaza Hotel confrontation",
+      "local": "./assets/scenes/plaza.jpg",
+      "format": "JPEG",
+      "width": 650,
+      "height": 409,
+      "bytes": 77169,
+      "sha256": "6635e21dab2433a2aff478d944767ec5a77d4b030040938b8061501156439b34",
+      "alt": "Tom, Daisy, Gatsby and Nick at the Plaza Hotel in the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "car": {
+      "source_page": "https://millergatsby.weebly.com/dreams.html",
+      "image_url": "https://millergatsby.weebly.com/uploads/4/4/3/7/44377131/7710167_orig.jpg",
+      "description": "The return journey by car",
+      "local": "./assets/scenes/car.jpg",
+      "format": "JPEG",
+      "width": 1024,
+      "height": 428,
+      "bytes": 84963,
+      "sha256": "4bfa6f53d692136cb7f0b416450a1f0c8231e61bee941535e9e04665d6761fcb",
+      "alt": "Myrtle is struck by Gatsby's yellow car in the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "funeral": {
+      "source_page": "https://tvovermind.com/top-scenes-from-2013s-the-great-gatsby/",
+      "image_url": "https://tvovermind.com/wp-content/uploads/2022/10/IMG_20221020_145329-750x384.jpg",
+      "description": "Gatsby's funeral",
+      "local": "./assets/scenes/funeral.jpg",
+      "format": "JPEG",
+      "width": 750,
+      "height": 384,
+      "bytes": 38867,
+      "sha256": "02317ea83c106f60c7631b2d4dbc7dd07b6884c2aa29f8520b0b08f632b762e8",
+      "alt": "Gatsby lies in his coffin in a still from the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    },
+    "green": {
+      "source_page": "https://www.uicdesign.com/DES/251-s20/work-4/raven-jacobs-the-great-gatsby-2013",
+      "image_url": "https://www.uicdesign.com/DES/images/uploads/251-s17/great-gatsby-movie-screencaps.com-15230_.jpg",
+      "description": "The green light",
+      "local": "./assets/scenes/green.jpg",
+      "format": "JPEG",
+      "width": 1920,
+      "height": 800,
+      "bytes": 238485,
+      "sha256": "eef9fa61b5132fbaaca95817bccece591b3457ce816e18709978badafae7552f",
+      "alt": "Gatsby stands on a dock facing a distant green light in the 2013 film.",
+      "visual_check": "Viewed the decoded image; content agrees with the supplied reference subject."
+    }
+  },
+  "portrait_crop_css": {
+    "default": {
+      "background-size": "230% auto",
+      "background-position": "center top"
+    },
+    "M": {
+      "background-position": "center 6%"
+    },
+    "W": {
+      "background-size": "280% auto",
+      "background-position": "26% center"
+    }
+  },
+  "scene_for_nodes": {
+    "Root": "hero",
+    "Connection": "party",
+    "Entry": "party",
+    "GatsbyParty": "party",
+    "Reunion": "reunion",
+    "SharedReunion": "reunion",
+    "Collapse": "plaza",
+    "Confrontation": "plaza",
+    "Plaza": "plaza",
+    "Consequences": "car",
+    "Tragedy": "car",
+    "FatalReturn": "car",
+    "Aftermath": "funeral",
+    "Funeral": "funeral",
+    "Aftermath_tail_tail": "green"
+  },
+  "retrieved_on": "2026-11-27",
+  "illustration_note": "Film stills illustrate a tree based on the novel; they are not independent evidence for the events. Henry Gatz is represented by an initial."
+}

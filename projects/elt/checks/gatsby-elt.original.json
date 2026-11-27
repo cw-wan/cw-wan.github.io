@@ -1,0 +1,583 @@
+{
+  "title": "The Great Gatsby: a top-down candidate ELT",
+  "scope": "Main storyline in 1922, following the supplied Wikipedia plot outline; selected scene details checked against the novel.",
+  "mapping": {
+    "channel": "one character",
+    "primitive": "a positive description of that character's scene-local action or participation",
+    "internal_node": "an original ELT operator; a macro label is replaced by its subtree, not retained as an overlapping primitive"
+  },
+  "sources": {
+    "wiki_plot": "https://en.wikipedia.org/wiki/The_Great_Gatsby#Plot_summary",
+    "novel_ch9": "https://www.gutenberg.org/cache/epub/64317/pg64317-images.html",
+    "elt_paper": "https://aclanthology.org/2026.emnlp-main.290/"
+  },
+  "channels": {
+    "N": "Nick Carraway / 尼克",
+    "G": "Jay Gatsby / 盖茨比",
+    "D": "Daisy Buchanan / 黛西",
+    "T": "Tom Buchanan / 汤姆",
+    "J": "Jordan Baker / 乔丹",
+    "M": "Myrtle Wilson / 默特尔",
+    "W": "George Wilson / 乔治·威尔逊",
+    "H": "Henry Gatz / 盖茨比的父亲"
+  },
+  "interpretation_notes": [
+    "Only SEQ, SYNC and GUARD occur; no new operator, negation, modified collision rule, or alternative-history branch is introduced.",
+    "SYNC for reunion, shooting and funeral uses one shared occurrence interval, with a separate participant projection on each character channel; the two projections are not independent evidence.",
+    "GUARD returns the hull, normally the containing character's activity interval, exactly as in the paper. FatalReturn covers Daisy's driving segment, not merely the collision instant.",
+    "The 1917 backstory is the content of Jordan's 1922 disclosure, not a 1917 event placed after a 1922 event.",
+    "T_identifies_owner and T_admits_telling are separate utterances at different times, not two occurrences of the same disclosure.",
+    "W_misidentifies denotes formation of an erroneous belief, not the truth of the embedded proposition.",
+    "The two final Nick actions are distinct intervals; N_returns is supported by the novel's retrospective account.",
+    "A synthetic interval assignment checks mathematical satisfiability only. No numeric witness intervals are presented as literary evidence, and actual Temporal Compactness remains unverified.",
+    "This is an event-schema parse, not a fully grounded ELT instance over a multivariate numerical signal."
+  ],
+  "validation": {
+    "primitive_count": 37,
+    "composite_count": 36,
+    "operators": {
+      "SEQ": 28,
+      "GUARD": 5,
+      "SYNC": 3
+    },
+    "unique_channel_count": 8,
+    "strict_binary_tree": true,
+    "no_shared_nodes": true,
+    "symbolic_witness_collision_count": 0,
+    "symbolic_witness_satisfiable": true,
+    "actual_story_time_compactness": "not verified: calendar intervals and a meaningful delta remain to be grounded",
+    "confidence_scores": "not assigned"
+  },
+  "root": {
+    "id": "Root",
+    "kind": "composite",
+    "operator": "SEQ",
+    "children": [
+      {
+        "id": "Connection",
+        "kind": "composite",
+        "operator": "SEQ",
+        "children": [
+          {
+            "id": "Entry",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "N_move",
+                "kind": "primitive",
+                "channel": "N",
+                "predicate": "迁入西卵居住",
+                "evidence_source": "wiki_plot"
+              },
+              {
+                "id": "Entry_tail",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "Dinner",
+                    "kind": "composite",
+                    "operator": "GUARD",
+                    "children": [
+                      {
+                        "id": "J_reveal_affair",
+                        "kind": "primitive",
+                        "channel": "J",
+                        "predicate": "向尼克透露汤姆的婚外情",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "N_dinner",
+                        "kind": "primitive",
+                        "channel": "N",
+                        "predicate": "在布坎南家作客",
+                        "evidence_source": "wiki_plot"
+                      }
+                    ],
+                    "label": "晚餐中获知婚外情"
+                  },
+                  {
+                    "id": "Entry_tail_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "G_green_light",
+                        "kind": "primitive",
+                        "channel": "G",
+                        "predicate": "独自在草坪眺望对岸绿灯",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "Entry_tail_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "ApartmentParty",
+                            "kind": "composite",
+                            "operator": "GUARD",
+                            "children": [
+                              {
+                                "id": "T_assault",
+                                "kind": "primitive",
+                                "channel": "T",
+                                "predicate": "在公寓聚会中打伤默特尔",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "N_apartment_party",
+                                "kind": "primitive",
+                                "channel": "N",
+                                "predicate": "参加汤姆与默特尔的公寓聚会",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ],
+                            "label": "公寓聚会中的暴力"
+                          },
+                          {
+                            "id": "GatsbyParty",
+                            "kind": "composite",
+                            "operator": "GUARD",
+                            "children": [
+                              {
+                                "id": "G_introduce",
+                                "kind": "primitive",
+                                "channel": "G",
+                                "predicate": "在聚会中向尼克介绍自己并接近他",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "N_gatsby_party",
+                                "kind": "primitive",
+                                "channel": "N",
+                                "predicate": "参加盖茨比的豪宅聚会",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ],
+                            "label": "在豪宅聚会中相识"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "label": "进入交际圈"
+          },
+          {
+            "id": "Reunion",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "Lunch",
+                "kind": "composite",
+                "operator": "GUARD",
+                "children": [
+                  {
+                    "id": "G_background",
+                    "kind": "primitive",
+                    "channel": "G",
+                    "predicate": "在午餐中向尼克讲述自己的身世",
+                    "evidence_source": "wiki_plot"
+                  },
+                  {
+                    "id": "N_lunch",
+                    "kind": "primitive",
+                    "channel": "N",
+                    "predicate": "与盖茨比共进午餐",
+                    "evidence_source": "wiki_plot"
+                  }
+                ],
+                "label": "午餐与身世叙述"
+              },
+              {
+                "id": "Reunion_tail",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "J_backstory",
+                    "kind": "primitive",
+                    "channel": "J",
+                    "predicate": "向尼克讲述盖茨比与黛西的旧情及重聚愿望；1917年的事件是本次讲述的内容",
+                    "evidence_source": "wiki_plot"
+                  },
+                  {
+                    "id": "Reunion_tail_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "N_arrange",
+                        "kind": "primitive",
+                        "channel": "N",
+                        "predicate": "事先安排盖茨比与黛西的重逢",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "Reunion_tail_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "SharedReunion",
+                            "kind": "composite",
+                            "operator": "SYNC",
+                            "children": [
+                              {
+                                "id": "G_reunite",
+                                "kind": "primitive",
+                                "channel": "G",
+                                "predicate": "参与与黛西的重逢",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "D_reunite",
+                                "kind": "primitive",
+                                "channel": "D",
+                                "predicate": "参与与盖茨比的重逢",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ],
+                            "label": "同一重逢场景的双方参与"
+                          },
+                          {
+                            "id": "D_affair_begins",
+                            "kind": "primitive",
+                            "channel": "D",
+                            "predicate": "重逢后与盖茨比开始婚外情",
+                            "evidence_source": "wiki_plot"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "label": "重逢与私情建立"
+          }
+        ],
+        "label": "接近与重逢"
+      },
+      {
+        "id": "Collapse",
+        "kind": "composite",
+        "operator": "SEQ",
+        "children": [
+          {
+            "id": "Confrontation",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "T_discovers",
+                "kind": "primitive",
+                "channel": "T",
+                "predicate": "发现黛西与盖茨比的私情",
+                "evidence_source": "wiki_plot"
+              },
+              {
+                "id": "Plaza",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "G_demands",
+                    "kind": "primitive",
+                    "channel": "G",
+                    "predicate": "要求黛西声明自己从未爱过汤姆",
+                    "evidence_source": "wiki_plot"
+                  },
+                  {
+                    "id": "Plaza_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "D_admits",
+                        "kind": "primitive",
+                        "channel": "D",
+                        "predicate": "承认自己爱过汤姆，也爱盖茨比",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "Plaza_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "T_exposes",
+                            "kind": "primitive",
+                            "channel": "T",
+                            "predicate": "揭露盖茨比的私酒生意",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "Plaza_tail_tail_tail",
+                            "kind": "composite",
+                            "operator": "SEQ",
+                            "children": [
+                              {
+                                "id": "D_stays",
+                                "kind": "primitive",
+                                "channel": "D",
+                                "predicate": "选择留在汤姆身边",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "T_sends_home",
+                                "kind": "primitive",
+                                "channel": "T",
+                                "predicate": "让盖茨比送黛西回家",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "label": "广场酒店对峙"
+              }
+            ],
+            "label": "私情暴露与关系破裂"
+          },
+          {
+            "id": "Consequences",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "Tragedy",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "FatalReturn",
+                    "kind": "composite",
+                    "operator": "GUARD",
+                    "children": [
+                      {
+                        "id": "M_collision",
+                        "kind": "primitive",
+                        "channel": "M",
+                        "predicate": "在返程车辆撞击中死亡",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "D_driving",
+                        "kind": "primitive",
+                        "channel": "D",
+                        "predicate": "在返程途中驾驶盖茨比的汽车；此片段覆盖撞击时刻",
+                        "evidence_source": "wiki_plot"
+                      }
+                    ],
+                    "label": "黛西驾车片段中的致命碰撞"
+                  },
+                  {
+                    "id": "Tragedy_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "Protect",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "G_reveals_driver",
+                            "kind": "primitive",
+                            "channel": "G",
+                            "predicate": "向尼克透露驾驶者是黛西，并表示愿为她承担责任",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "Protect_tail",
+                            "kind": "composite",
+                            "operator": "SEQ",
+                            "children": [
+                              {
+                                "id": "N_urges_flee",
+                                "kind": "primitive",
+                                "channel": "N",
+                                "predicate": "劝盖茨比离开以避开追究",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "G_refuses_flee",
+                                "kind": "primitive",
+                                "channel": "G",
+                                "predicate": "拒绝离开",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "事故后的披露与劝离"
+                      },
+                      {
+                        "id": "Revenge",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "T_identifies_owner",
+                            "kind": "primitive",
+                            "channel": "T",
+                            "predicate": "告诉乔治·威尔逊肇事车辆的车主是盖茨比",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "Revenge_tail",
+                            "kind": "composite",
+                            "operator": "SEQ",
+                            "children": [
+                              {
+                                "id": "W_misidentifies",
+                                "kind": "primitive",
+                                "channel": "W",
+                                "predicate": "形成盖茨比是妻子情人的错误判断",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "Revenge_tail_tail",
+                                "kind": "composite",
+                                "operator": "SEQ",
+                                "children": [
+                                  {
+                                    "id": "Shooting",
+                                    "kind": "composite",
+                                    "operator": "SYNC",
+                                    "children": [
+                                      {
+                                        "id": "W_shoots",
+                                        "kind": "primitive",
+                                        "channel": "W",
+                                        "predicate": "向盖茨比开枪",
+                                        "evidence_source": "wiki_plot"
+                                      },
+                                      {
+                                        "id": "G_killed",
+                                        "kind": "primitive",
+                                        "channel": "G",
+                                        "predicate": "在泳池遭威尔逊枪击身亡",
+                                        "evidence_source": "wiki_plot"
+                                      }
+                                    ],
+                                    "label": "同一枪击事件的施害与受害参与"
+                                  },
+                                  {
+                                    "id": "W_suicide",
+                                    "kind": "primitive",
+                                    "channel": "W",
+                                    "predicate": "在杀死盖茨比后自杀",
+                                    "evidence_source": "wiki_plot"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "误认与报复"
+                      }
+                    ]
+                  }
+                ],
+                "label": "事故与报复"
+              },
+              {
+                "id": "Aftermath",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "Funeral",
+                    "kind": "composite",
+                    "operator": "SYNC",
+                    "children": [
+                      {
+                        "id": "N_funeral",
+                        "kind": "primitive",
+                        "channel": "N",
+                        "predicate": "出席盖茨比的葬礼",
+                        "evidence_source": "novel_ch9"
+                      },
+                      {
+                        "id": "H_funeral",
+                        "kind": "primitive",
+                        "channel": "H",
+                        "predicate": "出席儿子盖茨比的葬礼",
+                        "evidence_source": "wiki_plot"
+                      }
+                    ],
+                    "label": "共同出席葬礼"
+                  },
+                  {
+                    "id": "Aftermath_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "FinalTomEncounter",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "N_refuses_handshake",
+                            "kind": "primitive",
+                            "channel": "N",
+                            "predicate": "再次遇到汤姆时起初拒绝与其握手",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "T_admits_telling",
+                            "kind": "primitive",
+                            "channel": "T",
+                            "predicate": "向尼克承认此前曾告知威尔逊肇事车辆属于盖茨比",
+                            "evidence_source": "wiki_plot"
+                          }
+                        ],
+                        "label": "最后与汤姆的交谈"
+                      },
+                      {
+                        "id": "Aftermath_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "N_final_green_light",
+                            "kind": "primitive",
+                            "channel": "N",
+                            "predicate": "离开前回到盖茨比宅邸，望向对岸绿灯",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "N_returns",
+                            "kind": "primitive",
+                            "channel": "N",
+                            "predicate": "返回美国中西部",
+                            "evidence_source": "novel_ch9"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "label": "葬礼与离开"
+              }
+            ],
+            "label": "悲剧与余波"
+          }
+        ],
+        "label": "关系破裂及后果"
+      }
+    ],
+    "label": "1922年的主要情节"
+  }
+}

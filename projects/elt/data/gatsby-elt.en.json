@@ -1,0 +1,583 @@
+{
+  "title": "The Great Gatsby: a top-down candidate ELT",
+  "scope": "Main storyline in 1922, following the supplied Wikipedia plot outline; selected scene details checked against the novel.",
+  "mapping": {
+    "channel": "one character",
+    "primitive": "a positive description of that character's scene-local action or participation",
+    "internal_node": "an original ELT operator; a macro label is replaced by its subtree, not retained as an overlapping primitive"
+  },
+  "sources": {
+    "wiki_plot": "https://en.wikipedia.org/wiki/The_Great_Gatsby#Plot_summary",
+    "novel_ch9": "https://www.gutenberg.org/cache/epub/64317/pg64317-images.html",
+    "elt_paper": "https://aclanthology.org/2026.emnlp-main.290/"
+  },
+  "channels": {
+    "N": "Nick Carraway",
+    "G": "Jay Gatsby",
+    "D": "Daisy Buchanan",
+    "T": "Tom Buchanan",
+    "J": "Jordan Baker",
+    "M": "Myrtle Wilson",
+    "W": "George Wilson",
+    "H": "Henry Gatz"
+  },
+  "interpretation_notes": [
+    "Only SEQ, SYNC and GUARD occur; no new operator, negation, modified collision rule, or alternative-history branch is introduced.",
+    "SYNC for reunion, shooting and funeral uses one shared occurrence interval, with a separate participant projection on each character channel; the two projections are not independent evidence.",
+    "GUARD returns the hull, normally the containing character's activity interval, exactly as in the paper. FatalReturn covers Daisy's driving segment, not merely the collision instant.",
+    "The 1917 backstory is the content of Jordan's 1922 disclosure, not a 1917 event placed after a 1922 event.",
+    "T_identifies_owner and T_admits_telling are separate utterances at different times, not two occurrences of the same disclosure.",
+    "W_misidentifies denotes formation of an erroneous belief, not the truth of the embedded proposition.",
+    "The two final Nick actions are distinct intervals; N_returns is supported by the novel's retrospective account.",
+    "A synthetic interval assignment checks mathematical satisfiability only. No numeric witness intervals are presented as literary evidence, and actual Temporal Compactness remains unverified.",
+    "This is an event-schema parse, not a fully grounded ELT instance over a multivariate numerical signal."
+  ],
+  "validation": {
+    "primitive_count": 37,
+    "composite_count": 36,
+    "operators": {
+      "SEQ": 28,
+      "GUARD": 5,
+      "SYNC": 3
+    },
+    "unique_channel_count": 8,
+    "strict_binary_tree": true,
+    "no_shared_nodes": true,
+    "symbolic_witness_collision_count": 0,
+    "symbolic_witness_satisfiable": true,
+    "actual_story_time_compactness": "not verified: calendar intervals and a meaningful delta remain to be grounded",
+    "confidence_scores": "not assigned"
+  },
+  "root": {
+    "id": "Root",
+    "kind": "composite",
+    "operator": "SEQ",
+    "children": [
+      {
+        "id": "Connection",
+        "kind": "composite",
+        "operator": "SEQ",
+        "children": [
+          {
+            "id": "Entry",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "N_move",
+                "kind": "primitive",
+                "channel": "N",
+                "predicate": "Moves to West Egg.",
+                "evidence_source": "wiki_plot"
+              },
+              {
+                "id": "Entry_tail",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "Dinner",
+                    "kind": "composite",
+                    "operator": "GUARD",
+                    "children": [
+                      {
+                        "id": "J_reveal_affair",
+                        "kind": "primitive",
+                        "channel": "J",
+                        "predicate": "Tells Nick about Tom's extramarital affair.",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "N_dinner",
+                        "kind": "primitive",
+                        "channel": "N",
+                        "predicate": "Visits the Buchanans at their home.",
+                        "evidence_source": "wiki_plot"
+                      }
+                    ],
+                    "label": "An Affair Revealed at Dinner"
+                  },
+                  {
+                    "id": "Entry_tail_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "G_green_light",
+                        "kind": "primitive",
+                        "channel": "G",
+                        "predicate": "Stands alone on the lawn, gazing toward the green light across the bay.",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "Entry_tail_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "ApartmentParty",
+                            "kind": "composite",
+                            "operator": "GUARD",
+                            "children": [
+                              {
+                                "id": "T_assault",
+                                "kind": "primitive",
+                                "channel": "T",
+                                "predicate": "Injures Myrtle during the apartment party.",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "N_apartment_party",
+                                "kind": "primitive",
+                                "channel": "N",
+                                "predicate": "Attends Tom and Myrtle's apartment party.",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ],
+                            "label": "Violence at the Apartment Party"
+                          },
+                          {
+                            "id": "GatsbyParty",
+                            "kind": "composite",
+                            "operator": "GUARD",
+                            "children": [
+                              {
+                                "id": "G_introduce",
+                                "kind": "primitive",
+                                "channel": "G",
+                                "predicate": "Introduces himself to Nick at the party and approaches him.",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "N_gatsby_party",
+                                "kind": "primitive",
+                                "channel": "N",
+                                "predicate": "Attends a party at Gatsby's mansion.",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ],
+                            "label": "Meeting at Gatsby's Party"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "label": "Entering the Social Circle"
+          },
+          {
+            "id": "Reunion",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "Lunch",
+                "kind": "composite",
+                "operator": "GUARD",
+                "children": [
+                  {
+                    "id": "G_background",
+                    "kind": "primitive",
+                    "channel": "G",
+                    "predicate": "Tells Nick about his background over lunch.",
+                    "evidence_source": "wiki_plot"
+                  },
+                  {
+                    "id": "N_lunch",
+                    "kind": "primitive",
+                    "channel": "N",
+                    "predicate": "Has lunch with Gatsby.",
+                    "evidence_source": "wiki_plot"
+                  }
+                ],
+                "label": "Lunch and Gatsby's Story"
+              },
+              {
+                "id": "Reunion_tail",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "J_backstory",
+                    "kind": "primitive",
+                    "channel": "J",
+                    "predicate": "Tells Nick about Gatsby and Daisy's past love and Gatsby's wish to reunite with her; the events of 1917 are the content of this telling.",
+                    "evidence_source": "wiki_plot"
+                  },
+                  {
+                    "id": "Reunion_tail_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "N_arrange",
+                        "kind": "primitive",
+                        "channel": "N",
+                        "predicate": "Makes arrangements in advance for Gatsby and Daisy to reunite.",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "Reunion_tail_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "SharedReunion",
+                            "kind": "composite",
+                            "operator": "SYNC",
+                            "children": [
+                              {
+                                "id": "G_reunite",
+                                "kind": "primitive",
+                                "channel": "G",
+                                "predicate": "Participates in the reunion with Daisy.",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "D_reunite",
+                                "kind": "primitive",
+                                "channel": "D",
+                                "predicate": "Participates in the reunion with Gatsby.",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ],
+                            "label": "Gatsby and Daisy Reunite"
+                          },
+                          {
+                            "id": "D_affair_begins",
+                            "kind": "primitive",
+                            "channel": "D",
+                            "predicate": "Begins an extramarital affair with Gatsby after their reunion.",
+                            "evidence_source": "wiki_plot"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "label": "Reunion and an Affair"
+          }
+        ],
+        "label": "Connection and Reunion"
+      },
+      {
+        "id": "Collapse",
+        "kind": "composite",
+        "operator": "SEQ",
+        "children": [
+          {
+            "id": "Confrontation",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "T_discovers",
+                "kind": "primitive",
+                "channel": "T",
+                "predicate": "Discovers Daisy and Gatsby's affair.",
+                "evidence_source": "wiki_plot"
+              },
+              {
+                "id": "Plaza",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "G_demands",
+                    "kind": "primitive",
+                    "channel": "G",
+                    "predicate": "Demands that Daisy declare she has never loved Tom.",
+                    "evidence_source": "wiki_plot"
+                  },
+                  {
+                    "id": "Plaza_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "D_admits",
+                        "kind": "primitive",
+                        "channel": "D",
+                        "predicate": "Admits that she has loved Tom as well as Gatsby.",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "Plaza_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "T_exposes",
+                            "kind": "primitive",
+                            "channel": "T",
+                            "predicate": "Exposes Gatsby's bootlegging business.",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "Plaza_tail_tail_tail",
+                            "kind": "composite",
+                            "operator": "SEQ",
+                            "children": [
+                              {
+                                "id": "D_stays",
+                                "kind": "primitive",
+                                "channel": "D",
+                                "predicate": "Chooses to stay with Tom.",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "T_sends_home",
+                                "kind": "primitive",
+                                "channel": "T",
+                                "predicate": "Tells Gatsby to take Daisy home.",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "label": "The Plaza Confrontation"
+              }
+            ],
+            "label": "The Affair Exposed"
+          },
+          {
+            "id": "Consequences",
+            "kind": "composite",
+            "operator": "SEQ",
+            "children": [
+              {
+                "id": "Tragedy",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "FatalReturn",
+                    "kind": "composite",
+                    "operator": "GUARD",
+                    "children": [
+                      {
+                        "id": "M_collision",
+                        "kind": "primitive",
+                        "channel": "M",
+                        "predicate": "Dies when struck by the car on its return journey.",
+                        "evidence_source": "wiki_plot"
+                      },
+                      {
+                        "id": "D_driving",
+                        "kind": "primitive",
+                        "channel": "D",
+                        "predicate": "Drives Gatsby's car on the return journey; this driving interval includes the collision.",
+                        "evidence_source": "wiki_plot"
+                      }
+                    ],
+                    "label": "A Fatal Collision"
+                  },
+                  {
+                    "id": "Tragedy_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "Protect",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "G_reveals_driver",
+                            "kind": "primitive",
+                            "channel": "G",
+                            "predicate": "Tells Nick that Daisy was driving and says he is willing to take responsibility for her.",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "Protect_tail",
+                            "kind": "composite",
+                            "operator": "SEQ",
+                            "children": [
+                              {
+                                "id": "N_urges_flee",
+                                "kind": "primitive",
+                                "channel": "N",
+                                "predicate": "Urges Gatsby to leave to avoid being pursued over the incident.",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "G_refuses_flee",
+                                "kind": "primitive",
+                                "channel": "G",
+                                "predicate": "Refuses to leave.",
+                                "evidence_source": "wiki_plot"
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "Disclosure and Advice"
+                      },
+                      {
+                        "id": "Revenge",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "T_identifies_owner",
+                            "kind": "primitive",
+                            "channel": "T",
+                            "predicate": "Tells George Wilson that Gatsby owns the car involved in the collision.",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "Revenge_tail",
+                            "kind": "composite",
+                            "operator": "SEQ",
+                            "children": [
+                              {
+                                "id": "W_misidentifies",
+                                "kind": "primitive",
+                                "channel": "W",
+                                "predicate": "Forms the mistaken belief that Gatsby was his wife's lover.",
+                                "evidence_source": "wiki_plot"
+                              },
+                              {
+                                "id": "Revenge_tail_tail",
+                                "kind": "composite",
+                                "operator": "SEQ",
+                                "children": [
+                                  {
+                                    "id": "Shooting",
+                                    "kind": "composite",
+                                    "operator": "SYNC",
+                                    "children": [
+                                      {
+                                        "id": "W_shoots",
+                                        "kind": "primitive",
+                                        "channel": "W",
+                                        "predicate": "Shoots Gatsby.",
+                                        "evidence_source": "wiki_plot"
+                                      },
+                                      {
+                                        "id": "G_killed",
+                                        "kind": "primitive",
+                                        "channel": "G",
+                                        "predicate": "Is shot dead by Wilson at the swimming pool.",
+                                        "evidence_source": "wiki_plot"
+                                      }
+                                    ],
+                                    "label": "The Pool Shooting"
+                                  },
+                                  {
+                                    "id": "W_suicide",
+                                    "kind": "primitive",
+                                    "channel": "W",
+                                    "predicate": "Kills himself after killing Gatsby.",
+                                    "evidence_source": "wiki_plot"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "Mistaken Belief and Revenge"
+                      }
+                    ]
+                  }
+                ],
+                "label": "Collision and Revenge"
+              },
+              {
+                "id": "Aftermath",
+                "kind": "composite",
+                "operator": "SEQ",
+                "children": [
+                  {
+                    "id": "Funeral",
+                    "kind": "composite",
+                    "operator": "SYNC",
+                    "children": [
+                      {
+                        "id": "N_funeral",
+                        "kind": "primitive",
+                        "channel": "N",
+                        "predicate": "Attends Gatsby's funeral.",
+                        "evidence_source": "novel_ch9"
+                      },
+                      {
+                        "id": "H_funeral",
+                        "kind": "primitive",
+                        "channel": "H",
+                        "predicate": "Attends the funeral of his son, Gatsby.",
+                        "evidence_source": "wiki_plot"
+                      }
+                    ],
+                    "label": "Attending Gatsby's Funeral"
+                  },
+                  {
+                    "id": "Aftermath_tail",
+                    "kind": "composite",
+                    "operator": "SEQ",
+                    "children": [
+                      {
+                        "id": "FinalTomEncounter",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "N_refuses_handshake",
+                            "kind": "primitive",
+                            "channel": "N",
+                            "predicate": "Initially refuses to shake Tom's hand when they meet again.",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "T_admits_telling",
+                            "kind": "primitive",
+                            "channel": "T",
+                            "predicate": "Admits to Nick that he previously told Wilson that Gatsby owned the car involved in the collision.",
+                            "evidence_source": "wiki_plot"
+                          }
+                        ],
+                        "label": "The Final Encounter with Tom"
+                      },
+                      {
+                        "id": "Aftermath_tail_tail",
+                        "kind": "composite",
+                        "operator": "SEQ",
+                        "children": [
+                          {
+                            "id": "N_final_green_light",
+                            "kind": "primitive",
+                            "channel": "N",
+                            "predicate": "Returns to Gatsby's mansion before leaving and looks toward the green light across the bay.",
+                            "evidence_source": "wiki_plot"
+                          },
+                          {
+                            "id": "N_returns",
+                            "kind": "primitive",
+                            "channel": "N",
+                            "predicate": "Returns to the American Midwest.",
+                            "evidence_source": "novel_ch9"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "label": "Funeral and Departure"
+              }
+            ],
+            "label": "Tragedy and Aftermath"
+          }
+        ],
+        "label": "Rupture and Consequences"
+      }
+    ],
+    "label": "1922: Dreams and Disillusionment"
+  }
+}

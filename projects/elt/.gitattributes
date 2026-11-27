@@ -1,0 +1,3 @@
+# Preserve the handoff data byte-for-byte, including on Windows checkouts.
+data/*.json -text
+checks/gatsby-elt.original.json -text
